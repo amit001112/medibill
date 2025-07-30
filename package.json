@@ -10,7 +10,6 @@
     "check": "tsc",
     "migrate": "drizzle-kit generate && drizzle-kit push",
     "postinstall": "npm run migrate"    
-    "db:push": "drizzle-kit push"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
