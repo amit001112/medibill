@@ -1,0 +1,74 @@
+{
+  "name": "hospital-billing-desktop",
+  "version": "1.0.0",
+  "description": "Hospital Billing Desktop Application - Offline SQLite + React + Electron",
+  "main": "main.js",
+  "scripts": {
+    "start": "node start-desktop.js",
+    "electron": "electron .",
+    "dev": "concurrently \"npm run backend:dev\" \"npm run frontend:dev\" \"wait-on http://localhost:3000 && electron .\"",
+    "backend:dev": "cd backend && npm run dev",
+    "frontend:dev": "cd frontend && npm run dev",
+    "backend:install": "cd backend && npm install",
+    "frontend:install": "cd frontend && npm install",
+    "build": "npm run frontend:build",
+    "frontend:build": "cd frontend && npm run build",
+    "dist": "npm run build && electron-builder",
+    "pack": "npm run build && electron-builder --dir",
+    "postinstall": "npm run backend:install && npm run frontend:install"
+  },
+  "build": {
+    "appId": "com.hospital.billing",
+    "productName": "Hospital Billing System",
+    "directories": {
+      "output": "dist-electron"
+    },
+    "files": [
+      "main.js",
+      "backend/**/*",
+      "frontend/dist/**/*",
+      "!backend/node_modules",
+      "!frontend/node_modules",
+      "!backend/hospital.db"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "assets/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "assets/icon.icns"
+    },
+    "linux": {
+      "target": "AppImage",
+      "icon": "assets/icon.png"
+    }
+  },
+  "keywords": [
+    "hospital",
+    "billing",
+    "medical",
+    "invoice",
+    "desktop",
+    "electron",
+    "sqlite",
+    "react"
+  ],
+  "author": "Hospital Billing Team",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "latest",
+    "electron-builder": "^24.0.0",
+    "concurrently": "^7.6.0",
+    "wait-on": "^7.0.1"
+  },
+  "dependencies": {
+    "electron-store": "^8.1.0"
+  }
+}
